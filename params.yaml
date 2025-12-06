@@ -1,0 +1,16 @@
+summarizer_model:
+  summarizer_model_path : 'models\microsoft_Phi-4-mini-instruct-Q4_K_L.gguf'
+  summarizer_max_context: 10000
+  gpu_layers: 0    # adjust more if GPU is available
+  max_words: 8000
+
+SST_model:
+  sst_model_name: 'medium'
+
+device: cpu
+
+paths:
+  output_dir: "output"
+  audio_dir: "output/audio"
+  model_dir: "models"
+  

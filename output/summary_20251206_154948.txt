@@ -1,0 +1,32 @@
+Video: Heaps in 3 minutes — Intro
+URL: https://youtu.be/0wPlzMU-k00?si=3K1_mgo4P1759e60
+Duration: 209s
+Processed: 2025-12-06T15:42:12.948762
+
+================================================================================
+SUMMARY
+================================================================================
+
+Heaps are nearly complete binary trees utilized for managing information, with two types: max heaps (where each node's value is less than or equal to its parent's) and min heaps (with values greater than or equal). Max heaps serve as the basis of heap sort algorithms while min heaps function effectively in priority queues. The height of a heap stands at O(log n), which will be explored further during discussions on operations, although it's worth noting that heaps can also represent arrays with root positioned at index 1 and children/parent indices calculated based on node's position.
+
+"""- Heapify an array: transform it into max or min heaps.
+- The process involves swapping elements until the heap property is satisfied for each element in a given range of indexes, starting from either end to middle (for building) or beginning to root (for deleting).
+- A recursive function can be used where if there are children left after an index swap then recursively call on them; otherwise return.
+- The time complexity: O(n log n), as the array is traversed once and each element swapped with its parent at most twice.
+
+FINAL SUMMARY:
+The process of heapifying a given range within an unsorted array involves swapping elements to satisfy max or min heap properties, starting from either end towards middle (for building) or root for deletion. This recursive function ensures that if children exist post-swap on any index, further calls are made; otherwise it returns the result. The time complexity of this operation is O(n log n), considering a single traversal and at most twice swapping per element.
+
+"""- Heapify an array: transform it into max or min heaps.
+- A recursive function can be used where if there are children left after an index swap then recursively call on them; otherwise return.
+- The time complexity of this operation is O(n log n), as the recursion depth will not exceed floor(log2n) and each element swapped at most twice.
+
+FINAL SUMMARY:
+Heapifying a given range within unsorted arrays into max or min heaps can be achieved through recursive functions, swapping elements to satisfy heap properties. This process ensures that if children exist post-swap on any index during building (from end towards middle), further calls are made; otherwise it returns the result for deletion from root upwards. The operation's time complexity is O(n log n) due to a single traversal and at most twice element swapping.
+
+"""- Heapify an array: transform it into max or min heaps.
+- A recursive function can be used where if there are children left after an index swap then recursively call on them; otherwise return.
+- The recursion depth will not exceed floor(log2n), as each node has a maximum of two child nodes, and the heap property is satisfied for all elements.
+
+FINAL SUMMARY:
+Transforming unsorted arrays into max or min heaps can be accomplished through recursive functions that ensure if children exist post-swap on any index during building (from end towards middle) further calls are made; otherwise it returns

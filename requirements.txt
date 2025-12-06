@@ -1,0 +1,24 @@
+# YouTube Video Summarizer - Requirements
+# Python 3.8+ required
+
+# YouTube downloading
+yt-dlp>=2023.12.30
+
+# Audio processing
+ffmpeg-python>=0.2.0
+
+# Speech-to-Text (Whisper)
+openai-whisper>=20231117
+torch>=2.0.0
+torchaudio>=2.0.0
+
+# Text Summarization
+transformers>=4.35.0
+sentencepiece>=0.1.99
+accelerate>=0.25.0
+
+# Utilities
+numpy>=1.24.0
+scipy>=1.11.0
+whisper==1.1.10
+gradio==6.0.2
