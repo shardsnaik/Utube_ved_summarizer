@@ -2,6 +2,7 @@ import logging
 from typing import List
 from llama_cpp import Llama
 from config import AppConfig
+from typing import Optional
 
 logger = logging.getLogger(__name__)
 configs = AppConfig().config
@@ -10,18 +11,50 @@ class OfflineSummarizer:
     '''
     Docstring for OfflineSummarizer
     '''
+    # def __init__(self,
+    #              model_path:str = configs.summarizer_model.summarizer_model_path,
+    #              max_context: int = configs.summarizer_model.summarizer_max_context,
+    #              temperature:int = 0.2,
+    #              gpu_layers:int = configs.summarizer_model.gpu_layers):
     def __init__(self,
-                 model_path:str = configs.summarizer_model.summarizer_model_path,
-                 max_context: int = configs.summarizer_model.summarizer_max_context,
+                 model_path: Optional[str] = None,
+                 max_context :Optional[str] = None,
                  temperature:int = 0.2,
-                 gpu_layers:int = configs.summarizer_model.gpu_layers):
+                 gpu_layers: Optional[str] = None):
          '''
          Args:
             model_path: Path to Quantized .gguf model
             max_context: LLaMA context window
             gpu_layers: Layers to offload to GPU (for speed). Set 0 for CPU-only.
          '''
+         if model_path is None:
+             model_path:str = configs.summarizer_model.summarizer_model_path
+             
+         elif model_path == 'phi':
+             model_path = 'models\microsoft_Phi-4-mini-instruct-Q4_K_L.gguf'
+         
+         elif model_path == 'Mistral-7B':
+             model_path = 'models\Mistral-7B-Instruct-v0.3-Q4_K_M.gguf'
+
+         else:
+             model_path='models\microsoft_Phi-4-mini-instruct-Q4_K_L.gguf'
          logger.info(f'Loading rthe quantised model:{model_path}')
+
+        #  if max_context and gpu_layers is None:
+        #      max_context: int = configs.summarizer_model.summarizer_max_context
+        #      gpu_layers= configs.summarizer_model.gpu_layers
+        #  else:
+        #      pass
+         if max_context is None:
+             max_context = configs.summarizer_model.summarizer_max_context
+ 
+         if gpu_layers is None:
+             gpu_layers = configs.summarizer_model.gpu_layers
+ 
+         # ✅ TYPE ENFORCEMENT
+         max_context = int(max_context)
+         gpu_layers = int(gpu_layers)
+        
          
          self.llm = Llama(
               model_path = model_path,

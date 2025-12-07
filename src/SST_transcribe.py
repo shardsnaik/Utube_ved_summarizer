@@ -34,7 +34,8 @@ class OfflineTranscriber:
         'large': 'Best accuracy, slowest (~10GB VRAM)'
     }
     
-    def __init__(self, model_size: str = configs.SST_model.sst_model_name, device: Optional[str] = configs.device):
+
+    def __init__(self, model_size:Optional[str] = None, device:Optional[str]=None):
         """
         Initialize transcriber with specified model
         
@@ -42,25 +43,27 @@ class OfflineTranscriber:
             model_size: Whisper model size ('tiny', 'base', 'small', 'medium', 'large')
             device: Device to run on ('cuda', 'cpu', or None for auto-detect)
         """
-        if model_size not in self.MODEL_SIZES:
-            raise ValueError(
-                f"Invalid model size. Choose from: {list(self.MODEL_SIZES.keys())}"
-            )
-        
-        self.model_size = model_size
-        
+        # if model_size not in self.MODEL_SIZES:
+        #     raise ValueError(
+        #         f"Invalid model size. Choose from: {list(self.MODEL_SIZES.keys())}"
+        #     )
+        if model_size is None:
+            self.model_size = configs.SST_model.sst_model_name
+        else:
+            self.model_size = model_size
+
         # Auto-detect device if not specified
         if device is None:
             self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
         else:
             self.device = device
         
-        logger.info(f"Initializing Whisper model: {model_size}")
+        logger.info(f"Initializing Whisper model: {self.model_size}")
         logger.info(f"Using device: {self.device}")
         
         # Load model
         try:
-            self.model = whisper.load_model(model_size, device=self.device)
+            self.model = whisper.load_model(self.model_size, device=self.device)
             logger.info("Model loaded successfully")
         except Exception as e:
             logger.error(f"Failed to load model: {str(e)}")
@@ -169,12 +172,12 @@ def download_model(model_size: str = 'base'):
     logger.info("Model download complete")
 
 
-if __name__ == "__main__":
-    # Example usage and testing
-    print("Available Whisper models:")
-    print(OfflineTranscriber.get_model_info())
+# if __name__ == "__main__":
+#     # Example usage and testing
+#     print("Available Whisper models:")
+#     print(OfflineTranscriber.get_model_info())
     
-    # Test model loading
-    print("\nTesting model initialization...")
-    transcriber = OfflineTranscriber(model_size='base')
-    print("✓ Model loaded successfully")
+#     # Test model loading
+#     print("\nTesting model initialization...")
+#     transcriber = OfflineTranscriber(model_size='base')
+#     print("✓ Model loaded successfully")
