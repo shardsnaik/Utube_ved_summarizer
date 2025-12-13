@@ -207,6 +207,12 @@ python app.py
 
 Then open your browser to `http://127.0.0.1:7860`
 
+**Docker:**
+
+```bash
+sharadsnaik/offline_youtube_summarizer:latest
+```
+
 **Features**:
 - 🎨 Beautiful gradient design
 - 📊 Real-time progress tracking
